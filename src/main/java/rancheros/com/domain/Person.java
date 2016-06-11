@@ -3,6 +3,7 @@ package rancheros.com.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Daniel on 11/06/2016.
@@ -13,6 +14,7 @@ public class Person {
 
     @Id
     private String id;
+    @Size(min=4, max=25)
     private String name;
     private String firtsname;
     private String lastname;
