@@ -4,7 +4,6 @@ import org.springframework.transaction.annotation.Transactional;
 import rancheros.com.domain.Person;
 import rancheros.com.domain.PersonRepository;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 import java.util.UUID;
 
