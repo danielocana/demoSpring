@@ -1,9 +1,11 @@
 package rancheros.com.spring.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.person.CreatePerson;
 import rancheros.com.application.service.person.FindAllPersons;
 import rancheros.com.application.service.person.FindById;
+import rancheros.com.domain.ErrorMessage;
 import rancheros.com.domain.Person;
 
 import javax.inject.Inject;
@@ -43,5 +45,14 @@ public class PersonController {
     @RequestMapping(method = RequestMethod.POST)
     public Person create (@RequestBody Person person){
         return createPerson.createPerson(person);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(value= HttpStatus.CONFLICT)
+    public ErrorMessage handleAllException(Exception ex) {
+
+        ErrorMessage model = new ErrorMessage("235",ex.getMessage(),ex.getLocalizedMessage());
+        return model;
+
     }
 }
