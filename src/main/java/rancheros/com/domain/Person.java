@@ -16,19 +16,15 @@ public class Person {
     private String id;
     @Size(min=4, max=25)
     private String name;
-    private String firtsname;
-    private String lastname;
     private String dni;
     private String phone;
 
     public Person() {
     }
 
-    public Person(String id, String name, String firtsname, String lastname, String dni, String phone) {
+    public Person(String id, String name, String dni, String phone) {
         this.id = id;
         this.name = name;
-        this.firtsname = firtsname;
-        this.lastname = lastname;
         this.dni = dni;
         this.phone = phone;
     }
@@ -39,14 +35,6 @@ public class Person {
 
     public String getName() {
         return name;
-    }
-
-    public String getFirtsname() {
-        return firtsname;
-    }
-
-    public String getLastname() {
-        return lastname;
     }
 
     public String getDni() {

@@ -33,7 +33,7 @@ public class FindByIdTest {
 
     @Test
     public void findById() throws Exception {
-        Person personMock = new Person("QA","name","firtsname","lastname","dni","phone");
+        Person personMock = new Person("QA","name","dni","phone");
 
         Mockito.when(repository.findById(Mockito.any(String.class)))
                 .then(invocation -> personMock);
