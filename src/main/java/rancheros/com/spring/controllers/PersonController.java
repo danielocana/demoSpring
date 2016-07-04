@@ -1,5 +1,8 @@
 package rancheros.com.spring.controllers;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.person.CreatePerson;
@@ -32,7 +35,14 @@ public class PersonController {
         this.createPerson = createPerson;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @ApiOperation(value = "Listar todas las personas")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = Person.class),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
     public List<Person> findAllPersons (){
         return findAllPersons.findAll();
     }
