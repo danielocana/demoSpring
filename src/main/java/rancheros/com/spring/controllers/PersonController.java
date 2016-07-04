@@ -9,7 +9,7 @@ import rancheros.com.application.service.person.CreatePerson;
 import rancheros.com.application.service.person.FindAllPersons;
 import rancheros.com.application.service.person.FindById;
 import rancheros.com.domain.ErrorMessage;
-import rancheros.com.domain.Person;
+import rancheros.com.domain.person.Person;
 
 import javax.inject.Inject;
 import java.util.List;

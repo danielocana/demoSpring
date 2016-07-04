@@ -1,4 +1,4 @@
-package rancheros.com.domain;
+package rancheros.com.domain.person;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

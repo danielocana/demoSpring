@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import rancheros.com.application.service.person.CreatePerson;
 import rancheros.com.application.service.person.FindAllPersons;
 import rancheros.com.application.service.person.FindById;
-import rancheros.com.domain.PersonRepository;
+import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.repository.PersonRepositoryInMemory;
 import rancheros.com.infrastructure.repository.PersonRepositoryPostgres;
 

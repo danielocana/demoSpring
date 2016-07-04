@@ -1,7 +1,7 @@
 package rancheros.com.infrastructure.repository;
 
-import rancheros.com.domain.Person;
-import rancheros.com.domain.PersonRepository;
+import rancheros.com.domain.person.Person;
+import rancheros.com.domain.person.PersonRepository;
 
 import java.util.ArrayList;
 import java.util.List;

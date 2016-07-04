@@ -8,11 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import rancheros.com.domain.Person;
-import rancheros.com.domain.PersonRepository;
+import rancheros.com.domain.person.Person;
+import rancheros.com.domain.person.PersonRepository;
 import static org.mockito.Mockito.verify;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Daniel on 11/06/2016.

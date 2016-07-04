@@ -1,8 +1,8 @@
 package rancheros.com.infrastructure.repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import rancheros.com.domain.Person;
-import rancheros.com.domain.PersonRepository;
+import rancheros.com.domain.person.Person;
+import rancheros.com.domain.person.PersonRepository;
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.UUID;

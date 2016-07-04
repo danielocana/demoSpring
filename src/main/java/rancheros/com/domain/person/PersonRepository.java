@@ -1,8 +1,8 @@
-package rancheros.com.domain;
+package rancheros.com.domain.person;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import rancheros.com.domain.person.Person;
 
 /**
  * Created by Daniel on 11/06/2016.
