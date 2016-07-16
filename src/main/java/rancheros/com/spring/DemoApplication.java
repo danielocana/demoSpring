@@ -3,6 +3,7 @@ package rancheros.com.spring;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import rancheros.com.spring.configuration.PersonConfiguration;
