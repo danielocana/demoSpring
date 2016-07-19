@@ -1,7 +1,10 @@
+
+# ignore this folder,
+.idea/*
+
 # ignore generated xml files,
 *.xml
 
-# ignore this folder,
-/.idea/*
+
 
 build/*
