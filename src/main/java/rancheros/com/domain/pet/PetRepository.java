@@ -11,4 +11,6 @@ public interface PetRepository {
     Pet create(Pet person);
 
     Pet update(Pet pet);
+
+    void delete(String id);
 }

@@ -4,10 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
-import rancheros.com.application.service.pet.CreatePet;
-import rancheros.com.application.service.pet.FindAllPets;
-import rancheros.com.application.service.pet.FindByIdPet;
-import rancheros.com.application.service.pet.UpdatePet;
+import rancheros.com.application.service.pet.*;
 import rancheros.com.domain.pet.Pet;
 import javax.inject.Inject;
 import java.util.List;
@@ -25,15 +22,19 @@ public class PetController {
 
     private UpdatePet updatePet;
 
+    private DeletePet deletePet;
+
     @Inject
     public PetController(FindAllPets findAllPets,
                          FindByIdPet findByIdPet,
                          CreatePet createPet,
-                         UpdatePet updatePet) {
+                         UpdatePet updatePet,
+                         DeletePet deletePet) {
         this.findAllPets = findAllPets;
         this.findByIdPet = findByIdPet;
         this.createPet = createPet;
         this.updatePet = updatePet;
+        this.deletePet = deletePet;
     }
 
     @ApiOperation(value = "Listar todas las mascotas")
@@ -62,5 +63,10 @@ public class PetController {
     public Pet update (@RequestBody Pet pet, @PathVariable String id) {
         pet.setId(id);
         return updatePet.update(pet);
+    }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable String id){
+        deletePet.delete(id);
     }
 }

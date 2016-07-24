@@ -65,4 +65,10 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
         jdbcTemplate.update(updateStatement, pet.getName(), pet.getType(), pet.getId());
         return pet;
     }
+
+    @Override
+    public void delete(String id) {
+        String deleteStatement = "DELETE FROM pet WHERE id=?";
+        jdbcTemplate.update(deleteStatement, id);
+    }
 }
