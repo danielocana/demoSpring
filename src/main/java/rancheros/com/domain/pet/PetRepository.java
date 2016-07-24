@@ -9,4 +9,6 @@ public interface PetRepository {
     Pet findById(String id);
 
     Pet create(Pet person);
+
+    Pet update(Pet pet);
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.pet.CreatePet;
 import rancheros.com.application.service.pet.FindAllPets;
 import rancheros.com.application.service.pet.FindByIdPet;
+import rancheros.com.application.service.pet.UpdatePet;
 import rancheros.com.domain.pet.Pet;
 import javax.inject.Inject;
 import java.util.List;
@@ -22,13 +23,17 @@ public class PetController {
 
     private CreatePet createPet;
 
+    private UpdatePet updatePet;
+
     @Inject
     public PetController(FindAllPets findAllPets,
                          FindByIdPet findByIdPet,
-                         CreatePet createPet) {
+                         CreatePet createPet,
+                         UpdatePet updatePet) {
         this.findAllPets = findAllPets;
         this.findByIdPet = findByIdPet;
         this.createPet = createPet;
+        this.updatePet = updatePet;
     }
 
     @ApiOperation(value = "Listar todas las mascotas")
@@ -51,5 +56,11 @@ public class PetController {
     @RequestMapping(method = RequestMethod.POST)
     public Pet create (@RequestBody Pet pet) {
         return createPet.insert(pet);
+    }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public Pet update (@RequestBody Pet pet, @PathVariable String id) {
+        pet.setId(id);
+        return updatePet.update(pet);
     }
 }

@@ -5,13 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-/**
- * Created by Daniel on 04/07/2016.
- */
 @Entity
 @Table(name = "pet")
 public class Pet {
-
 
     @Id
     private String id;

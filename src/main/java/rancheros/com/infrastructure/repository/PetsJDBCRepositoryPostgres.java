@@ -56,4 +56,13 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
         });
         return pet;
     }
+
+    @Override
+    public Pet update(Pet pet) {
+        String updateStatement = "UPDATE pet"
+                + " SET name=?, type=?"
+                + " WHERE id=?";
+        jdbcTemplate.update(updateStatement, pet.getName(), pet.getType(), pet.getId());
+        return pet;
+    }
 }

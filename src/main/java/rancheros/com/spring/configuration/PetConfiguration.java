@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import rancheros.com.application.service.pet.CreatePet;
 import rancheros.com.application.service.pet.FindAllPets;
 import rancheros.com.application.service.pet.FindByIdPet;
+import rancheros.com.application.service.pet.UpdatePet;
 import rancheros.com.domain.pet.PetRepository;
 import rancheros.com.infrastructure.repository.PetsJDBCRepositoryPostgres;
 
@@ -30,5 +31,10 @@ public class PetConfiguration {
     @Bean
     public CreatePet createPet (PetRepository repository){
         return new CreatePet(repository);
+    }
+
+    @Bean
+    public UpdatePet updatePet (PetRepository repository){
+        return new UpdatePet(repository);
     }
 }
