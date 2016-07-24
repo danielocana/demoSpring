@@ -10,10 +10,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-/**
- * Created by Daniel on 04/07/2016.
- */
+import java.util.UUID;
 
 @Transactional
 public class PetsJDBCRepositoryPostgres implements PetRepository{
@@ -42,16 +39,21 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
     @Override
     public Pet findById(String id) {
         String sql = "SELECT * FROM pet WHERE id = ?";
-
         Pet pet = (Pet)jdbcTemplate.queryForObject(
                 sql, new Object[] { id },
                 new BeanPropertyRowMapper(Pet.class));
-
         return pet;
     }
 
     @Override
-    public Pet create(Pet person) {
-        return null;
+    public Pet create(Pet pet) {
+        String id = UUID.randomUUID().toString();
+        pet.setId(id);
+        String sql = "INSERT INTO pet " +
+                "(id, name, type) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, new Object[] { pet.getId(),
+                pet.getName(),pet.getType()
+        });
+        return pet;
     }
 }
