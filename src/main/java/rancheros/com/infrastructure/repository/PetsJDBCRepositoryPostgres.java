@@ -1,5 +1,6 @@
 package rancheros.com.infrastructure.repository;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import rancheros.com.domain.pet.Pet;
@@ -40,7 +41,13 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
 
     @Override
     public Pet findById(String id) {
-        return null;
+        String sql = "SELECT * FROM pet WHERE id = ?";
+
+        Pet pet = (Pet)jdbcTemplate.queryForObject(
+                sql, new Object[] { id },
+                new BeanPropertyRowMapper(Pet.class));
+
+        return pet;
     }
 
     @Override

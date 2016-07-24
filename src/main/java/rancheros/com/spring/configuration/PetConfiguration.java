@@ -4,12 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import rancheros.com.application.service.pet.FindAllPets;
+import rancheros.com.application.service.pet.FindByIdPet;
 import rancheros.com.domain.pet.PetRepository;
 import rancheros.com.infrastructure.repository.PetsJDBCRepositoryPostgres;
 
-/**
- * Created by Daniel on 04/07/2016.
- */
 public class PetConfiguration {
 
     @Bean
@@ -21,5 +19,10 @@ public class PetConfiguration {
     @Bean
     public FindAllPets findAllPets(PetRepository repository){
         return new FindAllPets(repository);
+    }
+
+    @Bean
+    public FindByIdPet findByIdPet (PetRepository repository){
+        return new FindByIdPet(repository);
     }
 }
