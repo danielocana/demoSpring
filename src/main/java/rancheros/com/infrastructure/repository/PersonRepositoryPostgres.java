@@ -36,4 +36,9 @@ public class PersonRepositoryPostgres implements PersonRepository {
         entityManager.persist(person);
         return person;
     }
+
+    @Override
+    public Person update(Person person) {
+        return entityManager.merge(person);
+    }
 }

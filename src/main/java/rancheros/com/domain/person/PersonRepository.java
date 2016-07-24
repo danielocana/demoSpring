@@ -7,9 +7,11 @@ import java.util.List;
  */
 public interface PersonRepository {
 
-    List<Person> findAll();
+    List findAll();
 
     Person findById(String id);
 
     Person create(Person person);
+
+    Person update (Person person);
 }

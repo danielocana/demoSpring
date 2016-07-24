@@ -6,9 +6,6 @@ import rancheros.com.domain.person.PersonRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Daniel on 11/06/2016.
- */
 public class PersonRepositoryInMemory implements PersonRepository {
 
     private List<Person> personList = new ArrayList<>();
@@ -25,6 +22,11 @@ public class PersonRepositoryInMemory implements PersonRepository {
 
     @Override
     public Person create(Person person) {
+        return null;
+    }
+
+    @Override
+    public Person update(Person person) {
         return null;
     }
 }

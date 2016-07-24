@@ -8,11 +8,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import rancheros.com.spring.configuration.PersonConfiguration;
 import rancheros.com.spring.configuration.PetConfiguration;
-import rancheros.com.spring.configuration.SwaggerConfiguration;
 
 @SpringBootApplication
 @EnableEurekaClient
-@Import({PersonConfiguration.class, PetConfiguration.class, SwaggerConfiguration.class})
+@Import({PersonConfiguration.class, PetConfiguration.class})
 @EntityScan("rancheros.com")
 @EnableTransactionManagement
 public class DemoApplication {

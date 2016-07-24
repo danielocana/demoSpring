@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.person.CreatePerson;
 import rancheros.com.application.service.person.FindAllPersons;
 import rancheros.com.application.service.person.FindById;
+import rancheros.com.application.service.person.UpdatePerson;
 import rancheros.com.domain.ErrorMessage;
 import rancheros.com.domain.person.Person;
 
 import javax.inject.Inject;
 import java.util.List;
-
-/**
- * Created by Daniel on 11/06/2016.
- */
 
 @RestController
 @RequestMapping("/persons")
@@ -28,11 +25,14 @@ public class PersonController {
 
     private CreatePerson createPerson;
 
+    private UpdatePerson updatePerson;
+
     @Inject
-    public PersonController(FindAllPersons findAllPersons, FindById findById, CreatePerson createPerson) {
+    public PersonController(FindAllPersons findAllPersons, FindById findById, CreatePerson createPerson, UpdatePerson updatePerson) {
         this.findAllPersons = findAllPersons;
         this.findById = findById;
         this.createPerson = createPerson;
+        this.updatePerson = updatePerson;
     }
 
     @ApiOperation(value = "Listar todas las personas")
@@ -57,12 +57,15 @@ public class PersonController {
         return createPerson.createPerson(person);
     }
 
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")
+    public Person update (@RequestBody Person person, @PathVariable String id) {
+        person.setId(id);
+        return updatePerson.update(person);
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value= HttpStatus.CONFLICT)
     public ErrorMessage handleAllException(Exception ex) {
-
-        ErrorMessage model = new ErrorMessage("235",ex.getMessage(),ex.getLocalizedMessage());
-        return model;
-
+        return new ErrorMessage("235",ex.getMessage(),ex.getLocalizedMessage());
     }
 }

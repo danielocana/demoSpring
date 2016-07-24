@@ -5,15 +5,13 @@ import org.springframework.context.annotation.Profile;
 import rancheros.com.application.service.person.CreatePerson;
 import rancheros.com.application.service.person.FindAllPersons;
 import rancheros.com.application.service.person.FindById;
+import rancheros.com.application.service.person.UpdatePerson;
 import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.repository.PersonRepositoryInMemory;
 import rancheros.com.infrastructure.repository.PersonRepositoryPostgres;
 
 import javax.persistence.EntityManager;
 
-/**
- * Created by Daniel on 11/06/2016.
- */
 public class PersonConfiguration {
 
 
@@ -42,5 +40,10 @@ public class PersonConfiguration {
     @Bean
     public CreatePerson createPerson (PersonRepository repository){
         return new CreatePerson(repository);
+    }
+
+    @Bean
+    public UpdatePerson updatePerson (PersonRepository repository) {
+        return new UpdatePerson(repository);
     }
 }
