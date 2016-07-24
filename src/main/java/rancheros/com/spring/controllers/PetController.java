@@ -69,4 +69,6 @@ public class PetController {
     public void delete(@PathVariable String id){
         deletePet.delete(id);
     }
+
+    //TODO handle all exception from repository or others
 }
