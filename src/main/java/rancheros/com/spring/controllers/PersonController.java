@@ -5,11 +5,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import rancheros.com.application.service.person.CreatePerson;
-import rancheros.com.application.service.person.FindAllPersons;
-import rancheros.com.application.service.person.FindById;
-import rancheros.com.application.service.person.UpdatePerson;
+import rancheros.com.application.service.person.*;
 import rancheros.com.domain.ErrorMessage;
+import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
 
 import javax.inject.Inject;
@@ -27,12 +25,19 @@ public class PersonController {
 
     private UpdatePerson updatePerson;
 
+    private DeletePerson deletePerson;
+
     @Inject
-    public PersonController(FindAllPersons findAllPersons, FindById findById, CreatePerson createPerson, UpdatePerson updatePerson) {
+    public PersonController(FindAllPersons findAllPersons,
+                            FindById findById,
+                            CreatePerson createPerson,
+                            UpdatePerson updatePerson,
+                            DeletePerson deletePerson) {
         this.findAllPersons = findAllPersons;
         this.findById = findById;
         this.createPerson = createPerson;
         this.updatePerson = updatePerson;
+        this.deletePerson = deletePerson;
     }
 
     @ApiOperation(value = "Listar todas las personas")
@@ -63,9 +68,18 @@ public class PersonController {
         return updatePerson.update(person);
     }
 
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public void delete (@PathVariable String id) {
+        deletePerson.delete(id);
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value= HttpStatus.CONFLICT)
     public ErrorMessage handleAllException(Exception ex) {
+        if(ex instanceof PersonNotFoundException){
+            PersonNotFoundException exception = (PersonNotFoundException) ex;
+            return new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
+        }
         return new ErrorMessage("235",ex.getMessage(),ex.getLocalizedMessage());
     }
 }

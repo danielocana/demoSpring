@@ -14,4 +14,6 @@ public interface PersonRepository {
     Person create(Person person);
 
     Person update (Person person);
+
+    void delete (Person person);
 }

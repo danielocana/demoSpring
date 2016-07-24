@@ -1,21 +1,20 @@
 package rancheros.com.infrastructure.repository;
 
 import org.springframework.transaction.annotation.Transactional;
+import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Daniel on 11/06/2016.
- */
 @Transactional
 public class PersonRepositoryPostgres implements PersonRepository {
 
     private final EntityManager entityManager;
 
-    public PersonRepositoryPostgres(EntityManager entityManager){
+    public PersonRepositoryPostgres(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
@@ -26,7 +25,11 @@ public class PersonRepositoryPostgres implements PersonRepository {
 
     @Override
     public Person findById(String id) {
-        return entityManager.find(Person.class, id);
+        Person person = entityManager.find(Person.class, id);
+        if(person != null) {
+            return person;
+        }
+        throw new PersonNotFoundException(id);
     }
 
     @Override
@@ -40,5 +43,10 @@ public class PersonRepositoryPostgres implements PersonRepository {
     @Override
     public Person update(Person person) {
         return entityManager.merge(person);
+    }
+
+    @Override
+    public void delete(Person person) {
+        entityManager.remove(person);
     }
 }

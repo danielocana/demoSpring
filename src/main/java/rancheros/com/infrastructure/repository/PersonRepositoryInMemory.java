@@ -29,4 +29,9 @@ public class PersonRepositoryInMemory implements PersonRepository {
     public Person update(Person person) {
         return null;
     }
+
+    @Override
+    public void delete(Person person) {
+
+    }
 }

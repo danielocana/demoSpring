@@ -2,10 +2,7 @@ package rancheros.com.spring.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import rancheros.com.application.service.person.CreatePerson;
-import rancheros.com.application.service.person.FindAllPersons;
-import rancheros.com.application.service.person.FindById;
-import rancheros.com.application.service.person.UpdatePerson;
+import rancheros.com.application.service.person.*;
 import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.repository.PersonRepositoryInMemory;
 import rancheros.com.infrastructure.repository.PersonRepositoryPostgres;
@@ -45,5 +42,9 @@ public class PersonConfiguration {
     @Bean
     public UpdatePerson updatePerson (PersonRepository repository) {
         return new UpdatePerson(repository);
+    }
+    @Bean
+    public DeletePerson deletePerson (PersonRepository repository) {
+        return new DeletePerson(repository);
     }
 }
