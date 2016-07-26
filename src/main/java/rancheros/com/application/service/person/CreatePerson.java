@@ -1,17 +1,26 @@
 package rancheros.com.application.service.person;
 
+import org.springframework.integration.support.MessageBuilder;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+import rancheros.com.infrastructure.kafka.RancherosProducer;
+
+import java.util.UUID;
 
 public class CreatePerson {
 
     private PersonRepository personRepository;
+    private RancherosProducer producer;
 
-    public CreatePerson(PersonRepository personRepository) {
+    public CreatePerson(PersonRepository personRepository, RancherosProducer producer) {
         this.personRepository = personRepository;
+        this.producer = producer;
     }
 
     public Person createPerson(Person person){
+        person.setId(UUID.randomUUID().toString());
+        //Send message to kafka
+        producer.getMessageChannel().send(MessageBuilder.withPayload(person).build());
         return personRepository.create(person);
     }
 }

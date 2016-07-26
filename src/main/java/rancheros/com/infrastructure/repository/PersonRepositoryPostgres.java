@@ -7,7 +7,6 @@ import rancheros.com.domain.person.PersonRepository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.UUID;
 
 @Transactional
 public class PersonRepositoryPostgres implements PersonRepository {
@@ -34,8 +33,6 @@ public class PersonRepositoryPostgres implements PersonRepository {
 
     @Override
     public Person create(Person person) {
-        String id = UUID.randomUUID().toString();
-        person.setId(id);
         entityManager.persist(person);
         return person;
     }
