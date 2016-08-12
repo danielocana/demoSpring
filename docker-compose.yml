@@ -20,4 +20,4 @@ kafka:
     - "9092:9092"
   environment:
     ADVERTISED_HOST: "192.168.99.100"
-     ADVERTISED_PORT: "9092"
+    ADVERTISED_PORT: "9092"
