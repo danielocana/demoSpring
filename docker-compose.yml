@@ -13,27 +13,11 @@ eureka:
     - "8080:8080"
 
 kafka:
- image: spotify/kafka
- restart: allways
- ports:
-   - "2181:2181"
-   - "9092:9092"
- environment:
-   ADVERTISED_HOST: "192.168.99.100"
-   ADVERTISED_PORT: "9092"
-
-app:
-  image: java:8
-  working_dir: /app
-  volumes:
-    - ./build/libs:/app
-  command: java -jar -Dspring.profiles.active=dev /app/rancheros.jar
+  image: spotify/kafka
+  restart: allways
   ports:
-    - "8082:8000"
-  links:
-    - database:database
-    - kafka:kafka
-    - eureka:eureka
-  log_opt:
-    max-size: "100k"
-    max-file: "20"
+    - "2181:2181"
+    - "9092:9092"
+  environment:
+    ADVERTISED_HOST: "192.168.99.100"
+     ADVERTISED_PORT: "9092"

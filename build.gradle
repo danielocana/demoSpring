@@ -31,7 +31,6 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
     compile('org.springframework.cloud:spring-cloud-stream')
     compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
-
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-hateoas')
     compile('org.springframework.boot:spring-boot-starter-jdbc')
@@ -42,9 +41,11 @@ dependencies {
     compile('io.springfox:springfox-swagger-ui:2.5.0')
     compile('org.springframework.boot:spring-boot-starter-actuator')
 
-
     runtime('org.postgresql:postgresql')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path')
+    testCompile('com.shazam:shazamcrest:0.11')
 }
 dependencyManagement {
     imports {
@@ -57,4 +58,8 @@ eclipse {
         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
+}
+
+bootRun {
+    environment 'SPRING_PROFILES_ACTIVE', 'dev'
 }
