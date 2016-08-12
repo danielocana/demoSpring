@@ -33,13 +33,13 @@ public class PersonConfiguration {
     }
 
     @Bean
-    public FindById findById (PersonRepository repository){
-        return new FindById(repository);
+    public FindByIdPersonUseCase findById (PersonRepository repository){
+        return new FindByIdPersonUseCase(repository);
     }
 
     @Bean
-    public CreatePerson createPerson (PersonRepository repository, RancherosProducer producer){
-        return new CreatePerson(repository, producer);
+    public CreatePersonUseCase createPerson (PersonRepository repository, RancherosProducer producer){
+        return new CreatePersonUseCase(repository, producer);
     }
 
     @Bean

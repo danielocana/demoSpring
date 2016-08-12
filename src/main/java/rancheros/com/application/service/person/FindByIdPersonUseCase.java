@@ -3,11 +3,11 @@ package rancheros.com.application.service.person;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
 
-public class FindById {
+public class FindByIdPersonUseCase {
 
     private PersonRepository personRepository;
 
-    public FindById(PersonRepository personRepository) {
+    public FindByIdPersonUseCase(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 

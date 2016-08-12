@@ -19,9 +19,9 @@ public class PersonController {
 
     private FindAllPersons findAllPersons;
 
-    private FindById findById;
+    private FindByIdPersonUseCase findByIdPersonUseCase;
 
-    private CreatePerson createPerson;
+    private CreatePersonUseCase createPersonUseCase;
 
     private UpdatePerson updatePerson;
 
@@ -29,13 +29,13 @@ public class PersonController {
 
     @Inject
     public PersonController(FindAllPersons findAllPersons,
-                            FindById findById,
-                            CreatePerson createPerson,
+                            FindByIdPersonUseCase findByIdPersonUseCase,
+                            CreatePersonUseCase createPersonUseCase,
                             UpdatePerson updatePerson,
                             DeletePerson deletePerson) {
         this.findAllPersons = findAllPersons;
-        this.findById = findById;
-        this.createPerson = createPerson;
+        this.findByIdPersonUseCase = findByIdPersonUseCase;
+        this.createPersonUseCase = createPersonUseCase;
         this.updatePerson = updatePerson;
         this.deletePerson = deletePerson;
     }
@@ -54,12 +54,12 @@ public class PersonController {
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Person findById(@PathVariable String id){
-        return findById.findById(id);
+        return findByIdPersonUseCase.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public Person create (@RequestBody Person person){
-        return createPerson.createPerson(person);
+        return createPersonUseCase.createPerson(person);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")

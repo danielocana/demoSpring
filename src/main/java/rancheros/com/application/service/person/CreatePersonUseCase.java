@@ -7,12 +7,12 @@ import rancheros.com.infrastructure.kafka.RancherosProducer;
 
 import java.util.UUID;
 
-public class CreatePerson {
+public class CreatePersonUseCase {
 
     private PersonRepository personRepository;
     private RancherosProducer producer;
 
-    public CreatePerson(PersonRepository personRepository, RancherosProducer producer) {
+    public CreatePersonUseCase(PersonRepository personRepository, RancherosProducer producer) {
         this.personRepository = personRepository;
         this.producer = producer;
     }
