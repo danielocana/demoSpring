@@ -39,8 +39,9 @@ public class PersonRepositoryPostgres implements PersonRepository {
 
     @Override
     public Observable<Person> update(Person person) {
+        Person result = entityManager.merge(person);
         return Observable.create(subscriber -> {
-            subscriber.onNext(entityManager.merge(person));
+            subscriber.onNext(result);
             subscriber.onCompleted();
         });
     }
