@@ -5,6 +5,5 @@
 # ignore generated xml files,
 *.xml
 
-
-
-build/*
+.gradle
+build/
