@@ -4,6 +4,7 @@ import org.springframework.integration.support.MessageBuilder;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.kafka.RancherosProducer;
+import rx.Observable;
 
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class CreatePersonUseCase {
         this.producer = producer;
     }
 
-    public Person createPerson(Person person){
+    public Observable<Person> createPerson(Person person){
         person.setId(UUID.randomUUID().toString());
         //Send message to kafka
         producer.getMessageChannel().send(MessageBuilder.withPayload(person).build());

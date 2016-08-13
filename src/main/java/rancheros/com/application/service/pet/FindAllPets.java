@@ -4,11 +4,7 @@ import rancheros.com.domain.pet.Pet;
 import rancheros.com.domain.pet.PetRepository;
 import java.util.List;
 
-/**
- * Created by Daniel on 04/07/2016.
- */
 public class FindAllPets {
-
 
     private PetRepository repository;
 

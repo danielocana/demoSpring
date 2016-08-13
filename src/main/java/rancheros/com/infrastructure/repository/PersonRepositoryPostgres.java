@@ -1,12 +1,13 @@
 package rancheros.com.infrastructure.repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+import rx.Observable;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Transactional
 public class PersonRepositoryPostgres implements PersonRepository {
@@ -18,28 +19,30 @@ public class PersonRepositoryPostgres implements PersonRepository {
     }
 
     @Override
-    public List<Person> findAll() {
-        return entityManager.createQuery("SELECT p from " + Person.class.getSimpleName() + " p").getResultList();
+    public Observable<Person> findAll() {
+        return Observable.from(entityManager.createQuery("SELECT p from " + Person.class.getSimpleName() + " p").getResultList());
     }
 
     @Override
-    public Person findById(String id) {
-        Person person = entityManager.find(Person.class, id);
-        if(person != null) {
-            return person;
-        }
-        throw new PersonNotFoundException(id);
+    public Observable<Optional<Person>> findById(String id) {
+        return Observable.create(subscriber -> {
+            subscriber.onNext(Optional.ofNullable(entityManager.find(Person.class, id)));
+            subscriber.onCompleted();
+        });
     }
 
     @Override
-    public Person create(Person person) {
+    public Observable<Person> create(Person person) {
         entityManager.persist(person);
-        return person;
+        return Observable.just(person);
     }
 
     @Override
-    public Person update(Person person) {
-        return entityManager.merge(person);
+    public Observable<Person> update(Person person) {
+        return Observable.create(subscriber -> {
+            subscriber.onNext(entityManager.merge(person));
+            subscriber.onCompleted();
+        });
     }
 
     @Override

@@ -2,21 +2,17 @@ package rancheros.com.application.service.person;
 
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+import rx.Observable;
 
-import java.util.List;
-
-/**
- * Created by Daniel on 11/06/2016.
- */
-public class FindAllPersons {
+public class FindAllPersonsUseCase {
 
     private PersonRepository personRepository;
 
-    public FindAllPersons(PersonRepository personRepository){
+    public FindAllPersonsUseCase(PersonRepository personRepository){
         this.personRepository = personRepository;
     }
 
-    public List<Person> findAll (){
+    public Observable<Person> findAll (){
         return personRepository.findAll();
     }
 }

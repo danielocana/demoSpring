@@ -28,8 +28,8 @@ public class PersonConfiguration {
     }
 
     @Bean
-    public FindAllPersons findAllPersons(PersonRepository repository){
-        return new FindAllPersons(repository);
+    public FindAllPersonsUseCase findAllPersons(PersonRepository repository){
+        return new FindAllPersonsUseCase(repository);
     }
 
     @Bean
@@ -43,11 +43,11 @@ public class PersonConfiguration {
     }
 
     @Bean
-    public UpdatePerson updatePerson (PersonRepository repository) {
-        return new UpdatePerson(repository);
+    public UpdatePersonUseCase updatePerson (PersonRepository repository) {
+        return new UpdatePersonUseCase(repository);
     }
     @Bean
-    public DeletePerson deletePerson (PersonRepository repository) {
-        return new DeletePerson(repository);
+    public DeletePersonUseCase deletePerson (PersonRepository repository) {
+        return new DeletePersonUseCase(repository);
     }
 }

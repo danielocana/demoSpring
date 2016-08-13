@@ -2,31 +2,33 @@ package rancheros.com.infrastructure.repository;
 
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+import rx.Observable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PersonRepositoryInMemory implements PersonRepository {
 
     private List<Person> personList = new ArrayList<>();
 
     @Override
-    public List<Person> findAll() {
-        return personList;
+    public Observable<Person> findAll() {
+        return Observable.from(personList);
     }
 
     @Override
-    public Person findById(String id) {
+    public Observable<Optional<Person>> findById(String id) {
         return null;
     }
 
     @Override
-    public Person create(Person person) {
+    public Observable<Person> create(Person person) {
         return null;
     }
 
     @Override
-    public Person update(Person person) {
+    public Observable<Person> update(Person person) {
         return null;
     }
 

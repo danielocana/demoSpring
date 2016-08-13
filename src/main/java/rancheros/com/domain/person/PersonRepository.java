@@ -1,19 +1,17 @@
 package rancheros.com.domain.person;
 
-import java.util.List;
+import rx.Observable;
+import java.util.Optional;
 
-/**
- * Created by Daniel on 11/06/2016.
- */
 public interface PersonRepository {
 
-    List findAll();
+    Observable<Person> findAll();
 
-    Person findById(String id);
+    Observable<Optional<Person>> findById(String id);
 
-    Person create(Person person);
+    Observable<Person> create(Person person);
 
-    Person update (Person person);
+    Observable<Person> update (Person person);
 
     void delete (Person person);
 }

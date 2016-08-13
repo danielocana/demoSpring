@@ -11,33 +11,34 @@ import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
 
-    private FindAllPersons findAllPersons;
+    private FindAllPersonsUseCase findAllPersonsUseCase;
 
     private FindByIdPersonUseCase findByIdPersonUseCase;
 
     private CreatePersonUseCase createPersonUseCase;
 
-    private UpdatePerson updatePerson;
+    private UpdatePersonUseCase updatePersonUseCase;
 
-    private DeletePerson deletePerson;
+    private DeletePersonUseCase deletePersonUseCase;
 
     @Inject
-    public PersonController(FindAllPersons findAllPersons,
+    public PersonController(FindAllPersonsUseCase findAllPersonsUseCase,
                             FindByIdPersonUseCase findByIdPersonUseCase,
                             CreatePersonUseCase createPersonUseCase,
-                            UpdatePerson updatePerson,
-                            DeletePerson deletePerson) {
-        this.findAllPersons = findAllPersons;
+                            UpdatePersonUseCase updatePersonUseCase,
+                            DeletePersonUseCase deletePersonUseCase) {
+        this.findAllPersonsUseCase = findAllPersonsUseCase;
         this.findByIdPersonUseCase = findByIdPersonUseCase;
         this.createPersonUseCase = createPersonUseCase;
-        this.updatePerson = updatePerson;
-        this.deletePerson = deletePerson;
+        this.updatePersonUseCase = updatePersonUseCase;
+        this.deletePersonUseCase = deletePersonUseCase;
     }
 
     @ApiOperation(value = "Listar todas las personas")
@@ -48,38 +49,39 @@ public class PersonController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    public List<Person> findAllPersons (){
-        return findAllPersons.findAll();
+    public List<Person> findAllPersons() {
+        return findAllPersonsUseCase.findAll().toList().toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Person findById(@PathVariable String id){
-        return findByIdPersonUseCase.findById(id);
+    public Person findById(@PathVariable String id) {
+        return findByIdPersonUseCase.findById(id).toBlocking().first();
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public Person create (@RequestBody Person person){
-        return createPersonUseCase.createPerson(person);
+        return createPersonUseCase.createPerson(person).toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")
-    public Person update (@RequestBody Person person, @PathVariable String id) {
+    public Person update(@RequestBody Person person, @PathVariable String id) {
         person.setId(id);
-        return updatePerson.update(person);
+        return updatePersonUseCase.update(person).toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete (@PathVariable String id) {
-        deletePerson.delete(id);
+    public void delete(@PathVariable String id) {
+        deletePersonUseCase.delete(id);
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(value= HttpStatus.CONFLICT)
+    //@ResponseStatus(value = HttpStatus.CONFLICT)
     public ErrorMessage handleAllException(Exception ex) {
-        if(ex instanceof PersonNotFoundException){
+        if (ex instanceof PersonNotFoundException) {
             PersonNotFoundException exception = (PersonNotFoundException) ex;
             return new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
         }
-        return new ErrorMessage("235",ex.getMessage(),ex.getLocalizedMessage());
+        return new ErrorMessage("235", ex.getMessage(), ex.getLocalizedMessage());
     }
 }
