@@ -3,6 +3,7 @@ package rancheros.com.spring.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.pet.*;
 import rancheros.com.domain.pet.Pet;
@@ -46,7 +47,7 @@ public class PetController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     public List<Pet> findAllPets (){
-        return findAllPets.findAll();
+        return findAllPets.findAll().toList().toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
@@ -66,9 +67,10 @@ public class PetController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String id){
         deletePet.delete(id);
     }
 
-    //TODO handle all exception from repository or others
+    //TODO exceptions
 }

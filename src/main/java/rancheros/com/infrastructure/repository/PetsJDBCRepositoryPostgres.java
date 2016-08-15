@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import rancheros.com.domain.pet.Pet;
 import rancheros.com.domain.pet.PetRepository;
+import rx.Observable;
 
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
     }
 
     @Override
-    public List<Pet> findAll() {
+    public Observable<Pet> findAll() {
         String query = "select * from pet";
         List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
         List<Pet> pets = new ArrayList<>();
@@ -33,7 +34,7 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
             pet.setType((String)(row.get("type")));
             pets.add(pet);
         });
-        return pets;
+        return Observable.from(pets);
     }
 
     @Override

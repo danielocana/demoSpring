@@ -2,6 +2,8 @@ package rancheros.com.application.service.pet;
 
 import rancheros.com.domain.pet.Pet;
 import rancheros.com.domain.pet.PetRepository;
+import rx.Observable;
+
 import java.util.List;
 
 public class FindAllPets {
@@ -12,7 +14,7 @@ public class FindAllPets {
         this.repository = repository;
     }
 
-    public List<Pet> findAll (){
+    public Observable<Pet> findAll (){
         return repository.findAll();
     }
 }

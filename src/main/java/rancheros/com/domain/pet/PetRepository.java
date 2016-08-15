@@ -1,10 +1,10 @@
 package rancheros.com.domain.pet;
 
-import java.util.List;
+import rx.Observable;
 
 public interface PetRepository {
 
-    List<Pet> findAll();
+    Observable<Pet> findAll();
 
     Pet findById(String id);
 
