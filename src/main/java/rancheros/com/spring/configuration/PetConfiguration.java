@@ -10,7 +10,6 @@ import rancheros.com.infrastructure.repository.PetsJDBCRepositoryPostgres;
 public class PetConfiguration {
 
     @Bean
-    @Profile("dev")
     public PetRepository petRepository (JdbcTemplate jdbcTemplate){
         return new PetsJDBCRepositoryPostgres(jdbcTemplate);
     }

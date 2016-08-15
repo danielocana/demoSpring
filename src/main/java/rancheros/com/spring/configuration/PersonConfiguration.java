@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Profile;
 import rancheros.com.application.service.person.*;
 import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.kafka.RancherosProducer;
-import rancheros.com.infrastructure.repository.PersonRepositoryInMemory;
 import rancheros.com.infrastructure.repository.PersonRepositoryPostgres;
 
 import javax.persistence.EntityManager;
@@ -14,15 +13,7 @@ import javax.persistence.EntityManager;
 @EnableBinding(RancherosProducer.class)
 public class PersonConfiguration {
 
-
     @Bean
-    @Profile("test")
-    public PersonRepository personRepositoryTest(){
-        return new PersonRepositoryInMemory();
-    }
-
-    @Bean
-    @Profile("dev")
     public PersonRepository personRepository(EntityManager entityManager){
         return new PersonRepositoryPostgres(entityManager);
     }
