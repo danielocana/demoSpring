@@ -9,6 +9,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
+import rx.Observable;
+import rx.observers.TestSubscriber;
+
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 
@@ -29,13 +33,21 @@ public class FindByIdPersonUseCaseTest {
     public void findById() throws Exception {
         Person person = new Person("theId", "theName", "theDNI", "thePhone");
 
-        Mockito.when(personRepository.findById(Mockito.any(String.class)))
-                .thenAnswer(invocation -> person);
+        Mockito.when(personRepository.findById(Mockito.anyString()))
+                .thenAnswer(invocation -> Observable.just(Optional.of(person)));
 
-        Person response = findByIdPersonUseCase.findById("id");
+        TestSubscriber<Person> testSubscriber = new TestSubscriber<>();
 
-        Assert.assertEquals(response.getName(), "theName");
-        Assert.assertThat(response, samePropertyValuesAs(person));
+        findByIdPersonUseCase.findById("id").subscribe(testSubscriber);
+
+        testSubscriber.assertNoErrors();
+        testSubscriber.assertCompleted();
+        testSubscriber.assertValueCount(1);
+        testSubscriber.getOnNextEvents()
+                .forEach(person1 -> {
+                    Assert.assertEquals(person1.getName(), "theName");
+                    Assert.assertThat(person1, samePropertyValuesAs(person));
+                });
     }
 
 }
