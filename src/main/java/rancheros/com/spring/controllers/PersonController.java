@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.person.*;
 import rancheros.com.domain.ErrorMessage;
@@ -60,7 +61,7 @@ public class PersonController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Person create (@RequestBody Person person){
+    public Person create(@RequestBody Person person) {
         return createPersonUseCase.createPerson(person).toBlocking().first();
     }
 
@@ -76,12 +77,12 @@ public class PersonController {
     }
 
     @ExceptionHandler(Exception.class)
-    //@ResponseStatus(value = HttpStatus.CONFLICT)
-    public ErrorMessage handleAllException(Exception ex) {
+    public ResponseEntity<ErrorMessage> handleAllException(Exception ex) {
         if (ex instanceof PersonNotFoundException) {
             PersonNotFoundException exception = (PersonNotFoundException) ex;
-            return new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
+            ErrorMessage message = new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
-        return new ErrorMessage("235", ex.getMessage(), ex.getLocalizedMessage());
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
