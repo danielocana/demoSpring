@@ -12,7 +12,7 @@ public class FindAllPersonsUseCase {
         this.personRepository = personRepository;
     }
 
-    public Observable<Person> findAll (){
-        return personRepository.findAll();
+    public Observable<Person> findAll (String offset, String limit){
+        return personRepository.findAll(offset, limit);
     }
 }

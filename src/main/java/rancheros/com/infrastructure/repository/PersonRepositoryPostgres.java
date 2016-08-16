@@ -19,8 +19,11 @@ public class PersonRepositoryPostgres implements PersonRepository {
     }
 
     @Override
-    public Observable<Person> findAll() {
-        return Observable.from(entityManager.createQuery("SELECT p from " + Person.class.getSimpleName() + " p").getResultList());
+    public Observable<Person> findAll(String offset, String limit) {
+        return Observable.from(entityManager.createQuery("SELECT p from " + Person.class.getSimpleName() + " p")
+                .setFirstResult(Integer.parseInt(offset))
+                .setMaxResults(Integer.parseInt(limit))
+                .getResultList());
     }
 
     @Override

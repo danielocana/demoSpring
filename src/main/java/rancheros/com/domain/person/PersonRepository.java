@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface PersonRepository {
 
-    Observable<Person> findAll();
+    Observable<Person> findAll(String offset, String limit);
 
     Observable<Optional<Person>> findById(String id);
 
