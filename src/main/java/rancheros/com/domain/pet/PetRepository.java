@@ -4,7 +4,7 @@ import rx.Observable;
 
 public interface PetRepository {
 
-    Observable<Pet> findAll();
+    Observable<Pet> findAll(String offset, String limit);
 
     Pet findById(String id);
 

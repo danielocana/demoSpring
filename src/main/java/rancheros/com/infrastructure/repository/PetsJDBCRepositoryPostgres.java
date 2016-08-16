@@ -23,9 +23,10 @@ public class PetsJDBCRepositoryPostgres implements PetRepository{
     }
 
     @Override
-    public Observable<Pet> findAll() {
-        String query = "select * from pet";
-        List<Map<String, Object>> result = jdbcTemplate.queryForList(query);
+    public Observable<Pet> findAll(String offset, String limit) {
+        String query = "select * from pet LIMIT %d OFFSET %d";
+        String queryResult = String.format(query, Integer.parseInt(limit), Integer.parseInt(offset));
+        List<Map<String, Object>> result = jdbcTemplate.queryForList(queryResult);
         List<Pet> pets = new ArrayList<>();
         result.forEach(row ->{
             Pet pet = new Pet();

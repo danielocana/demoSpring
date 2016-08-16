@@ -46,8 +46,9 @@ public class PetController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    public List<Pet> findAllPets (){
-        return findAllPets.findAll().toList().toBlocking().first();
+    public List<Pet> findAllPets (@RequestParam( defaultValue = "0", required=false, name = "offset") String offset,
+                                  @RequestParam( defaultValue = "20", required=false, name = "limit") String limit){
+        return findAllPets.findAll(offset,limit).toList().toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)

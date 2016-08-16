@@ -14,7 +14,7 @@ public class FindAllPets {
         this.repository = repository;
     }
 
-    public Observable<Pet> findAll (){
-        return repository.findAll();
+    public Observable<Pet> findAll (String offset, String limit){
+        return repository.findAll(offset, limit);
     }
 }
