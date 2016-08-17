@@ -12,3 +12,8 @@ Git:
 Try 'git rm -r --cached .idea' in your terminal. It disables the change tracking.
 
 git rm -r --cached build
+
+To add variable gradle in windows:
+set GRADLE_HOME=d:\where you put gradle
+
+set PATH=%GRADLE_HOME%\bin;%PATH%
