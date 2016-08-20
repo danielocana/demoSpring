@@ -10,6 +10,7 @@ import rancheros.com.application.service.person.*;
 import rancheros.com.domain.ErrorMessage;
 import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
+import rx.exceptions.OnErrorNotImplementedException;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -81,6 +82,11 @@ public class PersonController {
     public ResponseEntity<ErrorMessage> handleAllException(Exception ex) {
         if (ex instanceof PersonNotFoundException) {
             PersonNotFoundException exception = (PersonNotFoundException) ex;
+            ErrorMessage message = new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        if(ex instanceof OnErrorNotImplementedException){
+            PersonNotFoundException exception = (PersonNotFoundException) ex.getCause();
             ErrorMessage message = new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }

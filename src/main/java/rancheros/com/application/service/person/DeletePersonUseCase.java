@@ -13,14 +13,14 @@ public class DeletePersonUseCase {
     }
 
     public void delete(String id) {
-       repository.findById(id)
-       .flatMap(optional -> {
-           if(optional.isPresent()){
-               repository.delete(optional.get());
-               return Observable.just(optional.get());
-           } else {
-               throw new PersonNotFoundException(id);
-           }
-       }).subscribe();
+        repository.findById(id)
+                .flatMap(optional -> {
+                    if (optional.isPresent()) {
+                        repository.delete(optional.get());
+                        return Observable.just(optional.get());
+                    } else {
+                        throw new PersonNotFoundException(id);
+                    }
+                }).subscribe();
     }
 }
