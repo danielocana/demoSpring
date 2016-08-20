@@ -13,5 +13,5 @@ public interface PersonRepository {
 
     Observable<Person> update (Person person);
 
-    void delete (Person person);
+    Observable<Void> delete (Person person);
 }

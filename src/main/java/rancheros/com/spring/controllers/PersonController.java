@@ -75,7 +75,7 @@ public class PersonController {
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable String id) {
-        deletePersonUseCase.delete(id);
+        deletePersonUseCase.delete(id).subscribe();
     }
 
     @ExceptionHandler(Exception.class)

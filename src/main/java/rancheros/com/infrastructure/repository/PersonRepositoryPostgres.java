@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
 import rx.Observable;
+import rx.Observer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -50,7 +51,8 @@ public class PersonRepositoryPostgres implements PersonRepository {
     }
 
     @Override
-    public void delete(Person person) {
+    public Observable<Void> delete(Person person) {
         entityManager.remove(person);
+        return Observable.create(Observer::onCompleted);
     }
 }

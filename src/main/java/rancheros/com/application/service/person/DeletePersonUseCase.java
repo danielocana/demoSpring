@@ -12,15 +12,15 @@ public class DeletePersonUseCase {
         this.repository = repository;
     }
 
-    public void delete(String id) {
-        repository.findById(id)
-                .flatMap(optional -> {
-                    if (optional.isPresent()) {
-                        repository.delete(optional.get());
-                        return Observable.just(optional.get());
+    public Observable<Void> delete(String id) {
+        return Observable.defer(() -> repository.findById(id)
+                .flatMap(personOptional -> {
+                    if (personOptional.isPresent()) {
+                        return repository.delete(personOptional.get());
                     } else {
                         throw new PersonNotFoundException(id);
                     }
-                }).subscribe();
+                })
+                .flatMap(person -> Observable.empty()));
     }
 }
