@@ -11,9 +11,7 @@ import rancheros.com.domain.ErrorMessage;
 import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
 import rx.exceptions.OnErrorNotImplementedException;
-
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
