@@ -1,0 +1,8 @@
+language: java
+
+./gradlew check
+
+./gradlew assemble
+
+jdk:
+  - oraclejdk8
