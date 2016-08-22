@@ -16,7 +16,7 @@ CREATE TABLE pet
 );
 
 INSERT INTO person
-VALUES ('1','testingOne','Y9999999T','123456789'), ('2','testingOne','Y1113425T','123456789');
+VALUES ('1','test-flyway-application','Y9999999T','123456789'), ('2','testingOne','Y1113425T','123456789');
 
 INSERT INTO pet
 VALUES ('1','petOne','dog'), ('2','petTwo','cat');
