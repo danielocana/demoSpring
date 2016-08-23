@@ -1,4 +1,5 @@
 language: java
-script: ./gradlew test
+./gradlew assemble
+./gradlew test
 jdk:
   - oraclejdk8
