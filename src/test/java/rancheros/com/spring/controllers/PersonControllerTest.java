@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@Ignore
 @SpringApplicationConfiguration(classes = DemoApplication.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
