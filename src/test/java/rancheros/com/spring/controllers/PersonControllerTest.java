@@ -1,24 +1,26 @@
 package rancheros.com.spring.controllers;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import rancheros.com.aplication.DemoApplicationTest;
 import rancheros.com.spring.DemoApplication;
+
+import javax.inject.Inject;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import javax.inject.Inject;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-@Ignore
 @SpringApplicationConfiguration(classes = DemoApplication.class)
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,8 +37,9 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void findAllPersons() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder = get("/persons");
+    public void findAllPersonsTest() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/persons")
+                .contentType(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
@@ -44,25 +47,21 @@ public class PersonControllerTest {
     }
 
     @Test
-    @Ignore
     public void findById() throws Exception {
 
     }
 
     @Test
-    @Ignore
     public void create() throws Exception {
 
     }
 
     @Test
-    @Ignore
     public void update() throws Exception {
 
     }
 
     @Test
-    @Ignore
     public void delete() throws Exception {
 
     }
