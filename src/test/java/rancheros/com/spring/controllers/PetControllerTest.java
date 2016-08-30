@@ -10,22 +10,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import rancheros.com.spring.DemoApplication;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import rancheros.com.aplication.DemoApplicationTest;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 import javax.inject.Inject;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Ignore
-@SpringApplicationConfiguration(classes = DemoApplication.class)
-@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforePersonTestRun.sql")
-public class PersonControllerTest {
+@SpringApplicationConfiguration(classes = DemoApplicationTest.class)
+@WebAppConfiguration
+@Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforePetTestRun.sql")
+public class PetControllerTest {
 
     private MockMvc mockMvc;
+
     @Inject
     private WebApplicationContext webApplicationContext;
 
@@ -35,36 +36,20 @@ public class PersonControllerTest {
     }
 
     @Test
-    public void findAllPersons() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder = get("/persons");
+    @Ignore
+    public void findAllPetsTest() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pets");
 
         mockMvc.perform(requestBuilder)
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray());
+                .andExpect(status().isOk());
     }
 
     @Test
     @Ignore
-    public void findById() throws Exception {
+    public void findByIdTest() throws Exception {
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pets/1");
 
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk());
     }
-
-    @Test
-    @Ignore
-    public void create() throws Exception {
-
-    }
-
-    @Test
-    @Ignore
-    public void update() throws Exception {
-
-    }
-
-    @Test
-    @Ignore
-    public void delete() throws Exception {
-
-    }
-
 }

@@ -75,19 +75,4 @@ public class PersonController {
     public void delete(@PathVariable String id) {
         deletePersonUseCase.delete(id).subscribe();
     }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessage> handleAllException(Exception ex) {
-        if (ex instanceof PersonNotFoundException) {
-            PersonNotFoundException exception = (PersonNotFoundException) ex;
-            ErrorMessage message = new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        }
-        if(ex instanceof OnErrorNotImplementedException){
-            PersonNotFoundException exception = (PersonNotFoundException) ex.getCause();
-            ErrorMessage message = new ErrorMessage(exception.getCode(), exception.getMessage(), exception.getLocalizedMessage());
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 }
