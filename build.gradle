@@ -48,6 +48,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('com.jayway.jsonpath:json-path')
     testCompile('com.shazam:shazamcrest:0.11')
+    testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
 }
 dependencyManagement {
     imports {

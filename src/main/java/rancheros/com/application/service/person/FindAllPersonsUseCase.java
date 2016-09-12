@@ -4,7 +4,7 @@ import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
 import rx.Observable;
 
-public class FindAllPersonsUseCase {
+public class FindAllPersonsUseCase  {
 
     private PersonRepository personRepository;
 

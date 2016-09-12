@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,8 +14,7 @@ import rancheros.com.spring.configuration.PetConfiguration;
 import rancheros.com.spring.configuration.SwaggerConfiguration;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {PersonConfiguration.class, SwaggerConfiguration.class})
-@Import({PetConfiguration.class})
+@Import({PersonConfiguration.class, PetConfiguration.class})
 @EnableTransactionManagement
 public class DemoApplicationTest {
 
