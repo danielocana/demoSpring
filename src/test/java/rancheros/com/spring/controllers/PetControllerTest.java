@@ -1,7 +1,6 @@
 package rancheros.com.spring.controllers;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -11,16 +10,18 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import rancheros.com.aplication.DemoApplicationTest;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import javax.inject.Inject;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import rancheros.com.spring.DemoApplication;
 
-@Ignore
+import javax.inject.Inject;
+
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DemoApplicationTest.class)
+@SpringApplicationConfiguration(classes = DemoApplication.class)
 @WebAppConfiguration
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforePetTestRun.sql")
 public class PetControllerTest {
@@ -36,7 +37,6 @@ public class PetControllerTest {
     }
 
     @Test
-    @Ignore
     public void findAllPetsTest() throws Exception {
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pets");
 
@@ -45,11 +45,12 @@ public class PetControllerTest {
     }
 
     @Test
-    @Ignore
     public void findByIdTest() throws Exception {
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/pets/1");
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/pets/1");
 
-        mockMvc.perform(requestBuilder)
-                .andExpect(status().isOk());
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is("1")));
+
     }
 }
