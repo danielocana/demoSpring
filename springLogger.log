@@ -1,0 +1,4 @@
+2016-09-22 22:19:49.172  INFO 6608 --- [http-nio-8000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2016-09-22 22:19:49.172  INFO 6608 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2016-09-22 22:19:49.209  INFO 6608 --- [http-nio-8000-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 37 ms
+2016-09-22 22:19:49.430  INFO 6608 --- [http-nio-8000-exec-1] r.c.spring.controllers.PersonController  : Buscando todas las personas

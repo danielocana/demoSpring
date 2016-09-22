@@ -3,20 +3,21 @@ package rancheros.com.spring.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rancheros.com.application.service.person.*;
-import rancheros.com.domain.ErrorMessage;
-import rancheros.com.domain.exception.PersonNotFoundException;
 import rancheros.com.domain.person.Person;
-import rx.exceptions.OnErrorNotImplementedException;
+
 import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
 
     private FindAllPersonsUseCase findAllPersonsUseCase;
 
@@ -51,6 +52,7 @@ public class PersonController {
             @ApiResponse(code = 500, message = "Failure")})
     public List<Person> findAllPersons(@RequestParam( defaultValue = "0", required=false, name = "offset") String offset,
                                        @RequestParam( defaultValue = "20", required=false, name = "limit") String limit) {
+        LOGGER.info("Find all persons controller");
         return findAllPersonsUseCase.findAll(offset, limit).toList().toBlocking().first();
     }
 
