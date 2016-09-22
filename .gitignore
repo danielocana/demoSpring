@@ -7,3 +7,6 @@
 
 .gradle
 build/
+
+#ignore logger file
+springLogger.log
