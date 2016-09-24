@@ -1,8 +1,7 @@
 language: java
 before_install:
  - chmod +x gradlew
-script: ./gradlew test
-script: ./gradlew assemble
+script: ./gradlew clean test
 jdk:
   - oraclejdk8
 notifications:
