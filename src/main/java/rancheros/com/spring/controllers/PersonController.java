@@ -50,8 +50,8 @@ public class PersonController {
             @ApiResponse(code = 403, message = "Forbidden"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
-    public List<Person> findAllPersons(@RequestParam( defaultValue = "0", required=false, name = "offset") String offset,
-                                       @RequestParam( defaultValue = "20", required=false, name = "limit") String limit) {
+    public List<Person> findAllPersons(@RequestParam(defaultValue = "0", required = false, name = "offset") String offset,
+                                       @RequestParam(defaultValue = "20", required = false, name = "limit") String limit) {
         LOGGER.info("Find all persons controller");
         return findAllPersonsUseCase.findAll(offset, limit).toList().toBlocking().first();
     }
@@ -74,6 +74,7 @@ public class PersonController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String id) {
         deletePersonUseCase.delete(id).subscribe();
     }

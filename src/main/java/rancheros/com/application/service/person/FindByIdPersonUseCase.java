@@ -15,6 +15,7 @@ public class FindByIdPersonUseCase {
 
     public Observable<Person> findById(String id) {
         return personRepository.findById(id)
-                .flatMap(person -> Observable.just(person.orElseThrow(()-> new PersonNotFoundException(id))));
+                .flatMap(person -> Observable.just(person.get()))
+                .onErrorResumeNext(error -> Observable.error(new PersonNotFoundException(id)));
     }
 }
