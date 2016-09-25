@@ -70,3 +70,7 @@ bootRun {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
+
+tasks.withType(Test) {
+    environment 'SPRING_PROFILES_ACTIVE', 'test'
+}
