@@ -7,8 +7,8 @@ before_script:
   - psql -c 'create database demotest;'
 
 before_install:
-  docker pull postgres
-  docker run -d
+ - docker pull postgres
+ - docker run -d
  - chmod +x gradlew
 script: ./gradlew clean test
 jdk:
