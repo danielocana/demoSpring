@@ -2,7 +2,9 @@ package rancheros.com.spring.controllers;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+@Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DemoApplication.class)
 @WebAppConfiguration
@@ -32,7 +35,7 @@ public class PetControllerTest {
     private WebApplicationContext webApplicationContext;
 
     @Before
-    public void setUp () throws Exception {
+    public void setUp() throws Exception {
         this.mockMvc = webAppContextSetup(webApplicationContext).build();
     }
 

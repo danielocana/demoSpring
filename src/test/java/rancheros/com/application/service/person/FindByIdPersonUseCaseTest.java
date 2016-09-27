@@ -3,6 +3,7 @@ package rancheros.com.application.service.person;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -11,11 +12,13 @@ import rancheros.com.domain.person.Person;
 import rancheros.com.domain.person.PersonRepository;
 import rx.Observable;
 import rx.observers.TestSubscriber;
+import testcategories.UnitaryTest;
 
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 
+@Category(UnitaryTest.class)
 public class FindByIdPersonUseCaseTest {
 
     @InjectMocks

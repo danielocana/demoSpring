@@ -1,15 +1,4 @@
 language: java
-
-services:
-  - docker
-
-before_script:
-  - psql -c 'create database demotest;'
-
-before_install:
- - docker pull postgres
- - docker run -d
- - chmod +x gradlew
 script: ./gradlew clean test
 jdk:
   - oraclejdk8

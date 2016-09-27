@@ -71,6 +71,35 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
+sourceSets {
+    test {
+        useJUnit {
+            includeCategories 'testcategories.UnitaryTest'
+        }
+    }
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/test/java')
+        }
+        resources.srcDir file('src/test/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    environment 'SPRING_PROFILES_ACTIVE', 'test'
+    useJUnit {
+        includeCategories 'testcategories.IntegrationTest'
+    }
+    //dependsOn "startTestDependencies"
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
 tasks.withType(Test) {
     environment 'SPRING_PROFILES_ACTIVE', 'test'
 }
