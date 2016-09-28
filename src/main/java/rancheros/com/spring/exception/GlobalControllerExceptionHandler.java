@@ -17,7 +17,7 @@ public class GlobalControllerExceptionHandler {
     }
 
     @ExceptionHandler(value = OnErrorNotImplementedException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorMessage handleErrorNotImplemented(OnErrorNotImplementedException exception) {
         return new ErrorMessage("500", exception.getMessage(), exception.getLocalizedMessage());

@@ -6,21 +6,15 @@ import rx.Observable;
 
 public class DeletePersonUseCase {
 
-    private PersonRepository repository;
+    private PersonRepository personRepository;
 
-    public DeletePersonUseCase(PersonRepository repository) {
-        this.repository = repository;
+    public DeletePersonUseCase(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
     public Observable<Void> delete(String id) {
-        return Observable.defer(() -> repository.findById(id)
-                .flatMap(personOptional -> {
-                    if (personOptional.isPresent()) {
-                        return repository.delete(personOptional.get());
-                    } else {
-                        throw new PersonNotFoundException(id);
-                    }
-                })
-                .flatMap(person -> Observable.empty()));
+        return personRepository.findById(id)
+                .flatMap(personOptional -> personRepository.delete(personOptional.get()))
+                .onErrorResumeNext(error -> Observable.error(new PersonNotFoundException(id)));
     }
 }

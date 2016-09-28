@@ -70,3 +70,30 @@ bootRun {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
+
+sourceSets {
+    test {
+        useJUnit {
+            includeCategories 'testcategories.UnitaryTest'
+        }
+    }
+    integrationTest {
+        java {
+            srcDir file('src/test/java')
+        }
+        resources.srcDir file('src/test/resources')
+    }
+}
+
+task integrationTest(type: Test) {
+    useJUnit {
+        includeCategories 'testcategories.IntegrationTest'
+    }
+}
+
+tasks.withType(Test) {
+    environment 'SPRING_PROFILES_ACTIVE', 'test'
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
