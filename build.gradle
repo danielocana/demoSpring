@@ -71,6 +71,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
+task startTestDependencies (type: Exec) {
+    commandLine "./startTestDependencies.sh"
+}
+
 sourceSets {
     test {
         useJUnit {
@@ -86,6 +90,7 @@ sourceSets {
 }
 
 task integrationTest(type: Test) {
+    dependsOn "startTestDependencies"
     useJUnit {
         includeCategories 'testcategories.IntegrationTest'
     }
