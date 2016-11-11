@@ -1,7 +1,7 @@
 database:
   image: postgres
   ports:
-    - "5432:5432"
+    - "13142:13142"
   environment:
     POSTGRES_USER: daniel
     POSTGRES_PASSWORD: daniel
