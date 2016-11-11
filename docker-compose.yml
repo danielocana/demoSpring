@@ -1,11 +1,20 @@
 database:
   image: postgres
   ports:
-    - "13142:5432"
+    - "5432:5432"
   environment:
     POSTGRES_USER: daniel
     POSTGRES_PASSWORD: daniel
     POSTGRES_DB: demo
+
+databasetest:
+  image: postgres
+  ports:
+    - "13142:5432"
+  environment:
+    POSTGRES_USER: daniel
+    POSTGRES_PASSWORD: daniel
+    POSTGRES_DB: demotest
 
 eureka:
   image: netflixoss/eureka:1.3.1
