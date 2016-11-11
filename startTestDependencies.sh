@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/local/bin/docker-compose up -d --no-deps databasetest
+docker run --net=host --name postgres -e POSTGRES_DB=demotest -e POSTGRES_PASSWORD=daniel -e POSTGRES_USER=daniel -d postgres
