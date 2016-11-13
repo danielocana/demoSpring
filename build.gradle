@@ -27,8 +27,6 @@ repositories {
 
 
 dependencies {
-    //compile files("${System.properties['JAVA_H']}/../lib/tools.jar")
-
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
     compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
     compile('org.springframework.cloud:spring-cloud-stream')
