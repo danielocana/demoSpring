@@ -12,6 +12,6 @@ import rancheros.com.spring.configuration.PetConfiguration;
 public class DemoApplicationTest {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(DemoApplicationTest.class, args);
     }
 }
