@@ -53,6 +53,5 @@ public class PetControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is("1")));
-
     }
 }

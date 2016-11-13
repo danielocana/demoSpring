@@ -1,7 +1,6 @@
 package rancheros.com.spring.configuration;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import rancheros.com.application.service.pet.*;
 import rancheros.com.domain.pet.PetRepository;
