@@ -27,8 +27,6 @@ repositories {
 
 
 dependencies {
-    //compile files("${System.properties['JAVA_H']}/../lib/tools.jar")
-
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
     compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
     compile('org.springframework.cloud:spring-cloud-stream')
@@ -71,6 +69,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
+task startTestDependencies (type: Exec) {
+    commandLine "./startTestDependencies.sh"
+}
+
 sourceSets {
     test {
         useJUnit {
@@ -86,6 +88,7 @@ sourceSets {
 }
 
 task integrationTest(type: Test) {
+    dependsOn "startTestDependencies"
     useJUnit {
         includeCategories 'testcategories.IntegrationTest'
     }

@@ -2,7 +2,6 @@ package rancheros.com.spring.configuration;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
 import rancheros.com.application.service.person.*;
 import rancheros.com.domain.person.PersonRepository;
 import rancheros.com.infrastructure.kafka.RancherosProducer;

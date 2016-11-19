@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import rancheros.com.spring.DemoApplication;
+import rancheros.com.DemoApplicationTest;
 import testcategories.IntegrationTest;
 
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @Category(IntegrationTest.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DemoApplication.class)
+@SpringApplicationConfiguration(classes = DemoApplicationTest.class)
 @WebAppConfiguration
 @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforePetTestRun.sql")
 public class PetControllerTest {
@@ -54,6 +54,5 @@ public class PetControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is("1")));
-
     }
 }

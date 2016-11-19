@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/danielocanaheredia/demoSpring.svg?branch=master)](https://travis-ci.org/danielocanaheredia/demoSpring)
+
 Get docker.
 pull image postgres.
 Start de app and flyway will create de database for you.
