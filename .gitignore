@@ -10,3 +10,5 @@ build/
 
 #ignore logger file
 springLogger.log
+.idea/
+onlyForMe.md
