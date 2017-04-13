@@ -23,7 +23,7 @@ eureka:
 
 kafka:
   image: spotify/kafka
-  restart: allways
+  restart: always
   ports:
     - "2181:2181"
     - "9092:9092"
