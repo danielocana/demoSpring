@@ -88,7 +88,6 @@ sourceSets {
 }
 
 task integrationTest(type: Test) {
-    dependsOn "startTestDependencies"
     useJUnit {
         includeCategories 'testcategories.IntegrationTest'
     }
@@ -98,5 +97,14 @@ tasks.withType(Test) {
     environment 'SPRING_PROFILES_ACTIVE', 'test'
     afterTest { desc, result ->
         println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
+task travis(type: Test) {
+    environment 'SPRING_PROFILES_ACTIVE', 'travis'
+    dependsOn "startTestDependencies"
+    useJUnit {
+        includeCategories 'testcategories.UnitaryTest'
+        includeCategories 'testcategories.IntegrationTest'
     }
 }

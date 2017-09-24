@@ -30,6 +30,7 @@ public class CreatePersonUseCaseTest {
 
     @Test
     @Ignore
+    //TODO I need to mock kafka messaging, line 21 in the use case.
     public void createPerson() throws Exception {
         Person person = new Person("theId", "theName", "theDNI", "thePhone");
 

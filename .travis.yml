@@ -1,6 +1,6 @@
 language: java
 
-script: ./gradlew clean test integrationTest
+script: ./gradlew travis
 
 jdk:
   - oraclejdk8
