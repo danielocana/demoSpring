@@ -14,27 +14,27 @@ public class PetConfiguration {
     }
 
     @Bean
-    public FindAllPets findAllPets(PetRepository repository){
-        return new FindAllPets(repository);
+    public FindAllPetsUseCase findAllPets(PetRepository repository){
+        return new FindAllPetsUseCase(repository);
     }
 
     @Bean
-    public FindByIdPet findByIdPet (PetRepository repository){
-        return new FindByIdPet(repository);
+    public FindByIdPetUseCase findByIdPet (PetRepository repository){
+        return new FindByIdPetUseCase(repository);
     }
 
     @Bean
-    public CreatePet createPet (PetRepository repository){
-        return new CreatePet(repository);
+    public CreatePetUseCase createPet (PetRepository repository){
+        return new CreatePetUseCase(repository);
     }
 
     @Bean
-    public UpdatePet updatePet (PetRepository repository){
-        return new UpdatePet(repository);
+    public UpdatePetUseCase updatePet (PetRepository repository){
+        return new UpdatePetUseCase(repository);
     }
 
     @Bean
-    public DeletePet deletePet (PetRepository repository){
-        return new DeletePet(repository);
+    public DeletePetUseCase deletePet (PetRepository repository){
+        return new DeletePetUseCase(repository);
     }
 }

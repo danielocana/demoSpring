@@ -2,7 +2,7 @@ package rancheros.com.spring.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import rancheros.com.domain.ErrorMessage;
+import rancheros.com.domain.error.ErrorMessage;
 import rancheros.com.domain.exception.PersonNotFoundException;
 import rx.exceptions.OnErrorNotImplementedException;
 

@@ -1,4 +1,4 @@
-package rancheros.com.domain;
+package rancheros.com.domain.error;
 
 public class ErrorMessage {
 
