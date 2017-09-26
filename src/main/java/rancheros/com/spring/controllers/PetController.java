@@ -10,7 +10,6 @@ import rancheros.com.domain.pet.Pet;
 import javax.inject.Inject;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/pets")
 public class PetController {
@@ -52,7 +51,7 @@ public class PetController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Pet findById (@PathVariable String id){
+    public PetDTO findById (@PathVariable String id){
         return findByIdPetUseCase.findById(id);
     }
 

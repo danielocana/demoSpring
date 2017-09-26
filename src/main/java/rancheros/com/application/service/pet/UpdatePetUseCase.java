@@ -12,6 +12,6 @@ public class UpdatePetUseCase {
     }
 
     public Pet update (Pet pet){
-        return repository.update(pet);
+        return repository.createOrUpdate(pet);
     }
 }

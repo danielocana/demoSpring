@@ -1,8 +1,10 @@
 package rancheros.com.application.service.pet;
 
-
+import rancheros.com.domain.exception.PetNotFoundException;
 import rancheros.com.domain.pet.Pet;
 import rancheros.com.domain.pet.PetRepository;
+
+import java.util.Optional;
 
 public class FindByIdPetUseCase {
 
@@ -12,7 +14,9 @@ public class FindByIdPetUseCase {
         this.repository = repository;
     }
 
-    public Pet findById(String id){
-        return repository.findById(id);
+    public PetDTO findById(String id){
+        return repository.findById(id)
+                .map(x -> new PetDTO(x.getId(),x.getName(),x.getType()))
+                .orElseThrow(() -> new PetNotFoundException(id));
     }
 }

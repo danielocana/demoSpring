@@ -12,6 +12,6 @@ public class CreatePetUseCase {
     }
 
     public Pet insert(Pet pet){
-        return repository.create(pet);
+        return repository.createOrUpdate(pet);
     }
 }

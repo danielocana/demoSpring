@@ -1,16 +1,19 @@
 package rancheros.com.spring.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import rancheros.com.application.service.pet.*;
 import rancheros.com.domain.pet.PetRepository;
-import rancheros.com.infrastructure.repository.PetsJDBCRepositoryPostgres;
+import rancheros.com.infrastructure.repository.PetDAO;
+import rancheros.com.infrastructure.repository.PetRepositoryPostgres;
 
+@EnableJpaRepositories(basePackages = "rancheros.com.infrastructure.repository")
 public class PetConfiguration {
 
     @Bean
-    public PetRepository petRepository (JdbcTemplate jdbcTemplate){
-        return new PetsJDBCRepositoryPostgres(jdbcTemplate);
+    public PetRepository petRepository (PetDAO petDAO){
+        return new PetRepositoryPostgres(petDAO);
     }
 
     @Bean
