@@ -6,11 +6,11 @@ import rx.Observable;
 
 import java.util.List;
 
-public class FindAllPets {
+public class FindAllPetsUseCase {
 
     private PetRepository repository;
 
-    public FindAllPets(PetRepository repository) {
+    public FindAllPetsUseCase(PetRepository repository) {
         this.repository = repository;
     }
 

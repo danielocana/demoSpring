@@ -10,31 +10,30 @@ import rancheros.com.domain.pet.Pet;
 import javax.inject.Inject;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/pets")
 public class PetController {
 
-    private FindAllPets findAllPets;
+    private FindAllPetsUseCase findAllPetsUseCase;
 
-    private FindByIdPet findByIdPet;
+    private FindByIdPetUseCase findByIdPetUseCase;
 
-    private CreatePet createPet;
+    private CreatePetUseCase createPetUseCase;
 
-    private UpdatePet updatePet;
+    private UpdatePetUseCase updatePetUseCase;
 
-    private DeletePet deletePet;
+    private DeletePetUseCase deletePet;
 
     @Inject
-    public PetController(FindAllPets findAllPets,
-                         FindByIdPet findByIdPet,
-                         CreatePet createPet,
-                         UpdatePet updatePet,
-                         DeletePet deletePet) {
-        this.findAllPets = findAllPets;
-        this.findByIdPet = findByIdPet;
-        this.createPet = createPet;
-        this.updatePet = updatePet;
+    public PetController(FindAllPetsUseCase findAllPetsUseCase,
+                         FindByIdPetUseCase findByIdPetUseCase,
+                         CreatePetUseCase createPetUseCase,
+                         UpdatePetUseCase updatePetUseCase,
+                         DeletePetUseCase deletePet) {
+        this.findAllPetsUseCase = findAllPetsUseCase;
+        this.findByIdPetUseCase = findByIdPetUseCase;
+        this.createPetUseCase = createPetUseCase;
+        this.updatePetUseCase = updatePetUseCase;
         this.deletePet = deletePet;
     }
 
@@ -48,23 +47,23 @@ public class PetController {
             @ApiResponse(code = 500, message = "Failure")})
     public List<Pet> findAllPets (@RequestParam( defaultValue = "0", required=false, name = "offset") String offset,
                                   @RequestParam( defaultValue = "20", required=false, name = "limit") String limit){
-        return findAllPets.findAll(offset,limit).toList().toBlocking().first();
+        return findAllPetsUseCase.findAll(offset,limit).toList().toBlocking().first();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Pet findById (@PathVariable String id){
-        return findByIdPet.findById(id);
+    public PetDTO findById (@PathVariable String id){
+        return findByIdPetUseCase.findById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public Pet create (@RequestBody Pet pet) {
-        return createPet.insert(pet);
+        return createPetUseCase.insert(pet);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = "application/json")
     public Pet update (@RequestBody Pet pet, @PathVariable String id) {
         pet.setId(id);
-        return updatePet.update(pet);
+        return updatePetUseCase.update(pet);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
